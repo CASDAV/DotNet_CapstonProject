@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="../LogiTrack.Application/LogiTrack.Application.csproj" />
     <ProjectReference Include="../LogiTrack.Domain/LogiTrack.Domain.csproj" />
+    <ProjectReference Include="../LogiTrack.Infrastructure/LogiTrack.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

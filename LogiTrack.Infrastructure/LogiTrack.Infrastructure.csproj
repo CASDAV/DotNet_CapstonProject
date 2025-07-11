@@ -7,16 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../LogiTrack.Domain/LogiTrack.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.18">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../LogiTrack.Application/LogiTrack.Application.csproj" />
+    <ProjectReference Include="../LogiTrack.Domain/LogiTrack.Domain.csproj" />
   </ItemGroup>
 
 </Project>

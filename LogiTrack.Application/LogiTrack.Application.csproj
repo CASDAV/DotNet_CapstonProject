@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="../LogiTrack.Domain/LogiTrack.Domain.csproj" />
-    <ProjectReference Include="../LogiTrack.Infrastructure/LogiTrack.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
