@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>67a2d779-dbf5-44b0-8f88-f9621605cf91</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs/" />
+    <ProjectReference Include="../LogiTrack.Application/LogiTrack.Application.csproj" />
+    <ProjectReference Include="../LogiTrack.Infrastructure/LogiTrack.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

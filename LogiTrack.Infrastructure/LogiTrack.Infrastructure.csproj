@@ -20,4 +20,8 @@
     <ProjectReference Include="../LogiTrack.Domain/LogiTrack.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistance/Migrations/" />
+  </ItemGroup>
+
 </Project>
