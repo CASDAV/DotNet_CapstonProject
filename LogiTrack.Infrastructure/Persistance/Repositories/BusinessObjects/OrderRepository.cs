@@ -1,8 +1,8 @@
-using LogiTrack.Application.Interfaces;
-using LogiTrack.Domain.Entities;
+using LogiTrack.Application.Interfaces.BusinessRepositories;
+using LogiTrack.Domain.Entities.BusinessObjects;
 using Microsoft.EntityFrameworkCore;
 
-namespace LogiTrack.Infrastructure.Persistance.Repositories;
+namespace LogiTrack.Infrastructure.Persistance.Repositories.BusinsessObjects;
 
 internal class OrderRepository : IOrdersRepository
 {
@@ -14,10 +14,12 @@ internal class OrderRepository : IOrdersRepository
     }
 
     // Create
-    public async Task AddOrderAsync(Order order)
+    public async Task<int> AddOrderAsync(Order order)
     {
         await _context.Orders.AddAsync(order);
         await _context.SaveChangesAsync();
+
+        return order.Id;
     }
 
     // Read
@@ -43,13 +45,14 @@ internal class OrderRepository : IOrdersRepository
     }
 
     // Delete
-    public async Task DeleteOrderAsync(int id)
+    public async Task<bool> DeleteOrderAsync(int id)
     {
         var order = await _context.Orders.FindAsync(id);
         if (order != null)
         {
             _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
+            return 0 < await _context.SaveChangesAsync();
         }
+        return false;
     }
 }

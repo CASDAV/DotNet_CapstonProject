@@ -1,6 +1,6 @@
-using LogiTrack.Application.Interfaces;
+using LogiTrack.Application.Interfaces.BusinessRepositories;
 using LogiTrack.Infrastructure.Persistance;
-using LogiTrack.Infrastructure.Persistance.Repositories;
+using LogiTrack.Infrastructure.Persistance.Repositories.BusinsessObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

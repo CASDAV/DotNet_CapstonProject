@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LogiTrack.Domain.Entities;
+namespace LogiTrack.Domain.Entities.BusinessObjects;
 
 public class Order
 {
@@ -9,10 +9,10 @@ public class Order
 
     [Required]
     [MaxLength(100)]
-    public string CustomerName { get; set; }
+    public string CustomerName { get; set; } = null!;
 
     [Required]
-    public DateTime DatePlaced { get; set; } = DateTime.UtcNow;
+    public DateTime DatePlaced { get; set; }
 
     // Navigation property for related InventoryItems
     public virtual List<InventoryItem> Items { get; set; } = new();

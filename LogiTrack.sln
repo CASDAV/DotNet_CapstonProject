@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogiTrack.Application", "Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogiTrack.Infrastructure", "LogiTrack.Infrastructure\LogiTrack.Infrastructure.csproj", "{634CEEEC-EC6F-443F-836A-7C7250F783D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogiTrack.Test", "LogiTrack.Test\LogiTrack.Test.csproj", "{50B1A1E9-E696-4AA8-A928-39EECD0CC526}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogiTrack.Test", "LogiTrack.Test\LogiTrack.Test.csproj", "{BB7AF453-171A-4DD1-9026-47175C77A218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{634CEEEC-EC6F-443F-836A-7C7250F783D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{634CEEEC-EC6F-443F-836A-7C7250F783D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{634CEEEC-EC6F-443F-836A-7C7250F783D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50B1A1E9-E696-4AA8-A928-39EECD0CC526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50B1A1E9-E696-4AA8-A928-39EECD0CC526}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50B1A1E9-E696-4AA8-A928-39EECD0CC526}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50B1A1E9-E696-4AA8-A928-39EECD0CC526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB7AF453-171A-4DD1-9026-47175C77A218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB7AF453-171A-4DD1-9026-47175C77A218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB7AF453-171A-4DD1-9026-47175C77A218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB7AF453-171A-4DD1-9026-47175C77A218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

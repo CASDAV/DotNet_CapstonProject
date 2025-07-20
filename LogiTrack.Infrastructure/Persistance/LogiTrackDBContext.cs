@@ -1,4 +1,4 @@
-using LogiTrack.Domain.Entities;
+using LogiTrack.Domain.Entities.BusinessObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogiTrack.Infrastructure.Persistance;

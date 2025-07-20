@@ -1,8 +1,8 @@
-using LogiTrack.Application.Interfaces;
-using LogiTrack.Domain.Entities;
+using LogiTrack.Application.Interfaces.BusinessRepositories;
+using LogiTrack.Domain.Entities.BusinessObjects;
 using Microsoft.EntityFrameworkCore;
 
-namespace LogiTrack.Infrastructure.Persistance.Repositories;
+namespace LogiTrack.Infrastructure.Persistance.Repositories.BusinsessObjects;
 
 internal class InventoryItemRepository : IInventoryItemRepository
 {
@@ -14,20 +14,39 @@ internal class InventoryItemRepository : IInventoryItemRepository
         _context = context;
     }
 
-    public async Task AddInventoryItemAsync(InventoryItem item)
+    public async Task<int> AddInventoryItemAsync(InventoryItem item)
     {
         await _context.InventoryItems.AddAsync(item);
         await _context.SaveChangesAsync();
+
+        return item.Id;
     }
 
-    public async Task DeleteInventoryItemAsync(int id)
+    public async Task AddInventoryItemCollectionAsync(List<InventoryItem> inventoryItems)
+    {
+        await _context.InventoryItems.AddRangeAsync(inventoryItems);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> DeleteInventoryItemAsync(int id)
     {
         InventoryItem? item = await _context.InventoryItems.FindAsync();
         if (item != null)
         {
             _context.InventoryItems.Remove(item);
-            await _context.SaveChangesAsync();
+            return 0 < await _context.SaveChangesAsync();
         }
+
+        return false;
+    }
+
+    public async Task<bool> DeleteInventoryItemsByOrderId(int id)
+    {
+
+        return -1 != await _context.InventoryItems
+            .Where(x => x.OrderId == id)
+            .ExecuteDeleteAsync();
+
     }
 
     public async Task<IEnumerable<InventoryItem>> GetAllInventoryItemsAsync()

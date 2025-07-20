@@ -1,11 +1,13 @@
-using LogiTrack.Domain.Entities;
+using LogiTrack.Domain.Entities.BusinessObjects;
 
-namespace LogiTrack.Application.Interfaces;
+namespace LogiTrack.Application.Interfaces.BusinessRepositories;
 
 public interface IInventoryItemRepository
 {
     // Create
-    Task AddInventoryItemAsync(InventoryItem item);
+    Task<int> AddInventoryItemAsync(InventoryItem item);
+
+    Task AddInventoryItemCollectionAsync(List<InventoryItem> inventoryItems);
 
     // Read
     Task<InventoryItem?> GetInventoryItemByIdAsync(int id);
@@ -16,5 +18,7 @@ public interface IInventoryItemRepository
     Task UpdateInventoryItemAsync(InventoryItem item);
 
     // Delete
-    Task DeleteInventoryItemAsync(int id);
+    Task<bool> DeleteInventoryItemAsync(int id);
+
+    Task<bool> DeleteInventoryItemsByOrderId(int id);
 }

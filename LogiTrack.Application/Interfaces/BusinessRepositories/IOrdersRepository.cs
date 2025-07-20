@@ -1,11 +1,11 @@
-using LogiTrack.Domain.Entities;
+using LogiTrack.Domain.Entities.BusinessObjects;
 
-namespace LogiTrack.Application.Interfaces;
+namespace LogiTrack.Application.Interfaces.BusinessRepositories;
 
 public interface IOrdersRepository
 {
     // Create
-    Task AddOrderAsync(Order order);
+    Task<int> AddOrderAsync(Order order);
 
     // Read
     Task<Order?> GetOrderByIdAsync(int id);
@@ -15,5 +15,5 @@ public interface IOrdersRepository
     Task UpdateOrderAsync(Order order);
 
     // Delete
-    Task DeleteOrderAsync(int id);
+    Task<bool> DeleteOrderAsync(int id);
 }
