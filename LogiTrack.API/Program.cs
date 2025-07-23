@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using LogiTrack.API.Services;
+using LogiTrack.API.Middleware;
 
 namespace LogiTrack.Main;
 
@@ -53,6 +54,8 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseRequestTiming();
 
         app.UseAuthentication();
 

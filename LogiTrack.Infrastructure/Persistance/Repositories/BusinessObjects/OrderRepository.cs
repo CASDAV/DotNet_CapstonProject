@@ -26,6 +26,7 @@ internal class OrderRepository : IOrdersRepository
     public async Task<Order?> GetOrderByIdAsync(int id)
     {
         return await _context.Orders
+            .AsNoTracking()
             .Include(o => o.Items) // Include related InventoryItems
             .FirstOrDefaultAsync(o => o.Id == id);
     }
@@ -33,7 +34,8 @@ internal class OrderRepository : IOrdersRepository
     public async Task<IEnumerable<Order>> GetAllOrdersAsync()
     {
         return await _context.Orders
-            .Include(o => o.Items) // Include related InventoryItems
+            .Include(o => o.Items)
+            .AsNoTracking() // Include related InventoryItems
             .ToListAsync();
     }
 

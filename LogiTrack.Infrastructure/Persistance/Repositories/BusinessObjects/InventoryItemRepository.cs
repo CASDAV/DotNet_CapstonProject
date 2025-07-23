@@ -30,7 +30,7 @@ internal class InventoryItemRepository : IInventoryItemRepository
 
     public async Task<bool> DeleteInventoryItemAsync(int id)
     {
-        InventoryItem? item = await _context.InventoryItems.FindAsync();
+        InventoryItem? item = await _context.InventoryItems.FindAsync(id);
         if (item != null)
         {
             _context.InventoryItems.Remove(item);
@@ -52,17 +52,21 @@ internal class InventoryItemRepository : IInventoryItemRepository
     public async Task<IEnumerable<InventoryItem>> GetAllInventoryItemsAsync()
     {
         return await _context.InventoryItems
+            .AsNoTracking()
             .ToListAsync();
     }
 
     public async Task<InventoryItem?> GetInventoryItemByIdAsync(int id)
     {
-        return await _context.InventoryItems.FirstOrDefaultAsync(i => i.Id == id);
+        return await _context.InventoryItems.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
     }
 
     public async Task<IEnumerable<InventoryItem>> GetInventoryItemsByOrderIdAsync(int orderId)
     {
-        return await _context.InventoryItems.Where(i => i.OrderId == orderId).ToListAsync();
+        return await _context.InventoryItems
+            .AsNoTracking()
+            .Where(i => i.OrderId == orderId)
+            .ToListAsync();
     }
 
     public async Task UpdateInventoryItemAsync(InventoryItem item)
