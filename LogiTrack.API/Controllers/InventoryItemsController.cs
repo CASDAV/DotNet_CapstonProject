@@ -1,11 +1,13 @@
 using LogiTrack.Application.DTOs.InventoryItems;
 using LogiTrack.Application.Features.InventoryItems;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogiTrack.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class InventoryItemsController : ControllerBase
     {
         private readonly CreateInventoryItem _createInventoryItem;
@@ -24,14 +26,17 @@ namespace LogiTrack.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> CreateInventoryItem([FromBody] CreateInventoryItemDTO item)
             => Ok(await _createInventoryItem.ExecuteAsync(item));
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteInventoryItem(int id)
             => Ok(await _deleteInventoryItem.ExecuteAsync(id));
 
         [HttpGet("{id}")]
+
         public async Task<IActionResult> GetInventoryItemById(int id)
             => Ok(await _getInventoryItemById.ExecuteAsync(id));
 

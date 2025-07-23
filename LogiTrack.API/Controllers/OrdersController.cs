@@ -1,11 +1,13 @@
 using LogiTrack.Application.DTOs.Orders;
 using LogiTrack.Application.Features.Orders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogiTrack.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
         private readonly CreateOrder _createOrder;
@@ -33,10 +35,12 @@ namespace LogiTrack.API.Controllers
             => Ok(await _getOrderById.ExecuteAsync(id));
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> CreateOrder([FromBody] OrderCreateDTO order)
             => Ok(await _createOrder.ExecuteAsync(order));
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteOrder(int id)
             => Ok(await _deleteOrder.ExecuteAsync(id));
     }

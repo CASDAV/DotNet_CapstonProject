@@ -1,9 +1,11 @@
 using LogiTrack.Domain.Entities.BusinessObjects;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogiTrack.Infrastructure.Persistance;
 
-internal class LogiTrackDBContext : DbContext
+internal class LogiTrackDBContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<InventoryItem> InventoryItems { get; set; }
     public DbSet<Order> Orders { get; set; }

@@ -1,6 +1,9 @@
 using LogiTrack.Application.Interfaces.BusinessRepositories;
+using LogiTrack.Application.Interfaces.Identity;
 using LogiTrack.Infrastructure.Persistance;
 using LogiTrack.Infrastructure.Persistance.Repositories.BusinsessObjects;
+using LogiTrack.Infrastructure.Persistance.Services.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,8 +36,14 @@ public static class InfrastructureRegistration
                 ServerVersion.AutoDetect(configuration.GetConnectionString("DefaultConnection")))
         );
 
+        services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<LogiTrackDBContext>()
+            .AddDefaultTokenProviders();
+
+
         services.AddScoped<IInventoryItemRepository, InventoryItemRepository>();
         services.AddScoped<IOrdersRepository, OrderRepository>();
+        services.AddScoped<IIdentityServices, IdentityServices>();
 
         return services;
     }

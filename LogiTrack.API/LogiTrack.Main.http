@@ -2,7 +2,6 @@
 
 ### Get all orders
 GET {{LogiTrack_HostAddress}}/api/Orders
-Accept: application/json
 
 ### Create a new order
 POST {{LogiTrack_HostAddress}}/api/Orders
@@ -15,11 +14,13 @@ Accept: application/json
 }
 
 ### Delete an order by ID
-DELETE {{LogiTrack_HostAddress}}/api/Orders/51
-Accept: application/json
+DELETE {{LogiTrack_HostAddress}}/api/Orders/52
 
 ### Get Inventory Items
 GET {{LogiTrack_HostAddress}}/api/InventoryItems
+
+### Get Inventory Item by id
+GET {{LogiTrack_HostAddress}}/api/InventoryItems/11
 Accept: application/json
 
 ### Create a new inventory item
@@ -31,4 +32,29 @@ Accept: application/json
   "name": "Widget",
   "quantity": 100,
   "location": "Warehouse A"
+}
+
+
+### Create new role
+GET {{LogiTrack_HostAddress}}/api/auth/create-role/User
+Accept: application/json
+
+### Create new user
+POST {{LogiTrack_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "userName": "ManagerUser",
+  "email": "managerUser@test.com",
+  "password": "Takina1_",
+  "role":"Manager"
+}
+
+### login
+POST {{LogiTrack_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "userName": "ManagerUser",
+  "password": "Takina1_"
 }

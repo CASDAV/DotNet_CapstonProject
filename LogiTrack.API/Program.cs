@@ -1,5 +1,9 @@
 using LogiTrack.Infrastructure;
 using LogiTrack.Application;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using LogiTrack.API.Services;
 
 namespace LogiTrack.Main;
 
@@ -16,10 +20,29 @@ public class Program
         builder.Services.AddApplicationServices();
         builder.Services.AddControllers();
 
+        builder.Services.AddSingleton<TokenService>();
+
         builder.Services.AddMemoryCache();
 
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+
+        var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+        var jwtKey = builder.Configuration.GetValue<string>("JWT_KEY");
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = jwtSettings["Issuer"],
+                    ValidAudience = jwtSettings["Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                };
+            });
 
         var app = builder.Build();
 
@@ -31,8 +54,9 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        app.UseAuthorization();
+        app.UseAuthentication();
 
+        app.UseAuthorization();
 
         app.MapControllers();
 
