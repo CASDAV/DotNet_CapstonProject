@@ -58,7 +58,9 @@ internal class InventoryItemRepository : IInventoryItemRepository
 
     public async Task<InventoryItem?> GetInventoryItemByIdAsync(int id)
     {
-        return await _context.InventoryItems.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+        return await _context.InventoryItems
+            .AsNoTracking()
+            .FirstOrDefaultAsync(i => i.Id == id);
     }
 
     public async Task<IEnumerable<InventoryItem>> GetInventoryItemsByOrderIdAsync(int orderId)

@@ -1,6 +1,5 @@
 using AutoMapper;
 using LogiTrack.Application.DTOs.InventoryItems;
-using LogiTrack.Application.Exceptions;
 using LogiTrack.Application.Interfaces.BusinessRepositories;
 using LogiTrack.Domain.Entities.BusinessObjects;
 
@@ -18,12 +17,11 @@ public class GetInventoryItemById
         _mapper = mapper;
     }
 
-    public async Task<DetailedInventoryItemDTO> ExecuteAsync(int id)
+    public async Task<DetailedInventoryItemDTO?> ExecuteAsync(int id)
     {
         InventoryItem? item = await _repository.GetInventoryItemByIdAsync(id);
 
-        if (item == null) throw new EntityNotFoundException($"Entity not found for {typeof(InventoryItem).FullName} class serching the ID {id}");
-
+        if (item == null) return null;
         return _mapper.Map<DetailedInventoryItemDTO>(item);
     }
 }

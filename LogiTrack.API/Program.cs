@@ -51,6 +51,11 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseCustomExceptionHandler();
         }
 
         app.UseHttpsRedirection();

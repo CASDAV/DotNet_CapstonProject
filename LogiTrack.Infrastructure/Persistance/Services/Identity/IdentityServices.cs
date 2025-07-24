@@ -1,5 +1,6 @@
 using LogiTrack.Application.Interfaces.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace LogiTrack.Infrastructure.Persistance.Services.Identity;
 
@@ -10,11 +11,14 @@ internal class IdentityServices : IIdentityServices
 
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public IdentityServices(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+    private readonly ILogger<IdentityServices> _logger;
+
+    public IdentityServices(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, ILogger<IdentityServices> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _roleManager = roleManager;
+        _logger = logger;
     }
 
     public async Task<bool> CreateRole(string roleName)
@@ -30,13 +34,23 @@ internal class IdentityServices : IIdentityServices
     {
         SignInResult result = await _signInManager.PasswordSignInAsync(userName, password, false, false);
 
-        if (!result.Succeeded) return (false, null);
+        if (!result.Succeeded)
+        {
+            _logger.LogError($"User lgin failed");
+            return (false, null);
+        }
 
         var user = await _userManager.FindByNameAsync(userName);
 
-        if (user == null) return (false, null);
+        if (user == null)
+        {
+            _logger.LogError($"User lgin failed");
+            return (false, null);
+        }
 
         var roles = await _userManager.GetRolesAsync(user);
+
+        _logger.LogInformation($"User {userName} succesfully login");
 
         return (result.Succeeded, roles.FirstOrDefault());
     }

@@ -1,6 +1,5 @@
 using AutoMapper;
 using LogiTrack.Application.DTOs.Orders;
-using LogiTrack.Application.Exceptions;
 using LogiTrack.Application.Interfaces.BusinessRepositories;
 using LogiTrack.Domain.Entities.BusinessObjects;
 
@@ -17,11 +16,11 @@ public class GetOrderById
         _mapper = mapper;
     }
 
-    public async Task<OrderDetailsDTO> ExecuteAsync(int id)
+    public async Task<OrderDetailsDTO?> ExecuteAsync(int id)
     {
         Order? order = await _repository.GetOrderByIdAsync(id);
 
-        if (order == null) throw new EntityNotFoundException($"Entity not found for {typeof(Order).FullName} class serching the ID {id}");
+        if (order == null) return null;
 
         OrderDetailsDTO orderDetails = _mapper.Map<OrderDetailsDTO>(order);
 

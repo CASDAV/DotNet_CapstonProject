@@ -56,7 +56,14 @@ namespace LogiTrack.API.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrderById(int id)
-            => Ok(await _getOrderById.ExecuteAsync(id));
+        {
+            var result = await _getOrderById.ExecuteAsync(id);
+
+            if (result == null) return NotFound($"the order with {id} can not be found");
+
+            return Ok(result);
+
+        }
 
         [HttpPost]
         [Authorize(Roles = "Manager")]

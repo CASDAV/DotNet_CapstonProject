@@ -59,7 +59,13 @@ namespace LogiTrack.API.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInventoryItemById(int id)
-            => Ok(await _getInventoryItemById.ExecuteAsync(id));
+        {
+            var result = await _getInventoryItemById.ExecuteAsync(id);
+
+            if (result == null) return NotFound($"The inventory item with {id} can not be found");
+
+            return Ok(result);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllInventoryItems()
@@ -74,7 +80,7 @@ namespace LogiTrack.API.Controllers
                     SlidingExpiration = TimeSpan.FromSeconds(30),
                     Size = 1
                 });
-                _logger.LogInformation("Stored items in cache under key 'InventoryItems'" );
+                _logger.LogInformation("Stored items in cache under key 'InventoryItems'");
                 return Ok(items);
             }
             else
