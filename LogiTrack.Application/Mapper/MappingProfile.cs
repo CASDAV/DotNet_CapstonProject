@@ -1,7 +1,6 @@
 using AutoMapper;
 using LogiTrack.Application.DTOs.InventoryItems;
 using LogiTrack.Application.DTOs.Orders;
-using LogiTrack.Application.Features.InventoryItems;
 using LogiTrack.Domain.Entities.BusinessObjects;
 
 namespace LogiTrack.Application.Mapper;
