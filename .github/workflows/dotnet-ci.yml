@@ -20,13 +20,21 @@ jobs:
         with:
           dotnet-version: '9.0.x'
           dotnet-quality: 'ga'
-          cache: true
 
       - name: 📦 Restore dependencies
         run: dotnet restore --locked-mode
 
       - name: 🔨 Build solution
         run: dotnet build --configuration Release --no-restore
+        
+      - name: 📂 List build output
+        run: ls -R **/bin/Release
+
+      - name: ☁️ Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-build
+          path: '**/bin/Release/**'
 
   test:
     name: Test
